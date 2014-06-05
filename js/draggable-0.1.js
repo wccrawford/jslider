@@ -69,8 +69,11 @@
 	Draggable.prototype._getPageCoords = function( event ){
 	  if( event.targetTouches && event.targetTouches[0] ){
 	    return { x: event.targetTouches[0].pageX, y: event.targetTouches[0].pageY };
-	  } else
+	  } else if( typeof(event.pageX) != 'undefined' ) {
 	    return { x: event.pageX, y: event.pageY };
+	  } else {
+	    return { x: event.originalEvent.pageX, y: event.originalEvent.pageY };
+	  }
 	};
 	
 	Draggable.prototype._bindEvent = function( ptr, eventType, handler ){
@@ -87,12 +90,21 @@
 		var self = this;
 
     this.supportTouches_ = 'ontouchend' in document;
-    this.events_ = {
-      "click": this.supportTouches_ ? "touchstart" : "click",
-      "down": this.supportTouches_ ? "touchstart" : "mousedown",
-      "move": this.supportTouches_ ? "touchmove" : "mousemove",
-      "up"  : this.supportTouches_ ? "touchend" : "mouseup"
-    };
+	this.supportMsPointer_ = navigator && navigator.msPointerEnabled;
+	if(this.supportMsPointer_)
+      this.events_ = {
+        "click": "click",
+        "down": "MSPointerDown pointerdown",
+        "move": "MSPointerMove pointermove",
+        "up"  : "MSPointerUp pointerup"
+      };
+	else
+      this.events_ = {
+        "click": this.supportTouches_ ? "touchstart" : "click",
+        "down": this.supportTouches_ ? "touchstart" : "mousedown",
+        "move": this.supportTouches_ ? "touchmove" : "mousemove",
+        "up"  : this.supportTouches_ ? "touchend" : "mouseup"
+      };
 
     this._bindEvent( $( document ), "move", function( event ){
 			if( self.is.drag ){

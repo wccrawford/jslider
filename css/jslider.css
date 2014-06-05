@@ -17,9 +17,9 @@
   .jslider .jslider-bg .r { width: 10%; left: 90%; background-position: right 0; }
   .jslider .jslider-bg .v { position: absolute; width: 60%; left: 20%; top: 0; height: 5px; background-repeat: repeat-x; background-position: 0 -40px; }
 
-  .jslider .jslider-pointer { width: 13px; height: 15px; background-position: 0 -60px; position: absolute; left: 20%; top: -4px; margin-left: -6px; cursor: pointer; cursor: hand; }
-  .jslider .jslider-pointer-hover { background-position: -20px -60px; }
-  .jslider .jslider-pointer-to { left: 80%; }
+  .jslider .jslider-pointer { width: 13px; height: 15px; background-position: 0 -60px; position: absolute; left: 20%; top: -4px; margin-left: -6px; cursor: pointer; cursor: hand; -ms-touch-action: none; }
+  .jslider .jslider-pointer-hover { background-position: -20px -60px; -ms-touch-action: none; }
+  .jslider .jslider-pointer-to { left: 80%; -ms-touch-action: none; }
 
   .jslider .jslider-label { font-size: 9px; line-height: 12px; color: black; opacity: 0.4; white-space: nowrap; padding: 0px 2px; position: absolute; top: -18px; left: 0px; }
   .jslider .jslider-label-to { left: auto; right: 0; }
